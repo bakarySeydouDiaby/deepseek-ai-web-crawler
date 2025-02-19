@@ -76,7 +76,3 @@ Vous pouvez modifier ces valeurs selon vos besoins.
 - **Journalisation:** Le projet utilise actuellement des instructions `print` pour les messages d'état. Pour la production ou le développement ultérieur, envisagez d'intégrer le module `logging` de Python.  
 - **Améliorations:** Le code est structuré en plusieurs modules pour maintenir la séparation des préoccupations, facilitant la compréhension et l'extension des fonctionnalités pour les débutants.  
 - **Dépendances:** Assurez-vous que les versions des packages spécifiées dans `requirements.txt` sont installées pour éviter les problèmes de compatibilité.  
-
-## Licence
-
-Incluez les informations de licence si applicable.
