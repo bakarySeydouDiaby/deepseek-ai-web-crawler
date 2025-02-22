@@ -1,6 +1,6 @@
 # Crawler Deep Seek pour Salles de Sport
 
-Ce projet est un crawler web construit avec Python qui extrait des données de salles de sport d'un site web en utilisant la programmation asynchrone avec Crawl4AI. Il utilise une stratégie d'extraction basée sur un modèle de langage et sauvegarde les données collectées dans un fichier CSV.
+Ce projet est un crawler web construit avec Python qui extrait les cours de javascript sur le site coursera en utilisant la programmation asynchrone avec Crawl4AI. Il utilise une stratégie d'extraction basée sur un modèle de langage et sauvegarde les données collectées dans un fichier CSV.
 
 ## Fonctionnalités
 
@@ -16,7 +16,7 @@ Ce projet est un crawler web construit avec Python qui extrait des données de s
 ├── main.py               # Point d'entrée principal du crawler
 ├── config.py             # Contient les constantes de configuration (URL de base, sélecteurs CSS, etc.)
 ├── models
-│   └── gym.py            # Définit le modèle de données Salle de Sport avec Pydantic
+│   └── cours.py            # Définit le modèle de données d'un sujet javascript avec Pydantic
 ├── utils
 │   ├── __init__.py       # Marqueur de package (vide) pour utils
 │   ├── data_utils.py     # Fonctions utilitaires pour le traitement et la sauvegarde des données
@@ -31,14 +31,23 @@ Ce projet est un crawler web construit avec Python qui extrait des données de s
 ### 1. Créer et Activer un Environnement Conda
 
 ```bash
-conda create -n deep-seek-crawler python=3.12 -y
-conda activate deep-seek-crawler
-```
+# List available Python versions
+asdf list-all python
+# Install Python 3.13 using asdf
+asdf install python 3.13.1
+# Set Python 3.13 as the local version for the project
+asdf local python 3.13.1
+# Create a virtual environment named 'venv'
+python3 -m venv venv
+source venv/bin/activate
+
 
 ### 2. Installer les Dépendances
 
 ```bash
 pip install -r requirements.txt
+playwright install 
+playwright install-deps
 ```
 
 ### 3. Configurer vos Variables d'Environnement  
@@ -59,7 +68,7 @@ Pour démarrer le crawler, exécutez:
 python main.py
 ```
 
-Le script va crawler le site web spécifié, extraire les données page par page, et sauvegarder les salles de sport complètes dans un fichier `salles_sport_completes.csv` dans le répertoire du projet. De plus, les statistiques d'utilisation de la stratégie LLM seront affichées après le crawling.
+Le script va crawler le site web spécifié, extraire les données page par page, et sauvegarder les cours de javascript dans un fichier `cours_javascript_completes.csv` dans le répertoire du projet. De plus, les statistiques d'utilisation de la stratégie LLM seront affichées après le crawling.
 
 ## Configuration
 

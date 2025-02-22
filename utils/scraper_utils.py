@@ -11,8 +11,8 @@ from crawl4ai import (
     LLMExtractionStrategy,
 )
 
-from models.salle_sport import SalleDeSport
-from utils.data_utils import is_complete_salle, is_duplicate_salle
+from models.cours_javascript import coursDeJavascript
+from utils.data_utils import is_complete_cours, is_duplicate_cours
 
 
 def get_browser_config() -> BrowserConfig:
@@ -29,11 +29,10 @@ def get_llm_strategy() -> LLMExtractionStrategy:
     return LLMExtractionStrategy(
         provider="groq/deepseek-r1-distill-llama-70b",  # Fournisseur du modèle LLM
         api_token=os.getenv("GROQ_API_KEY"),  # Token d'API pour l'authentification
-        schema=SalleDeSport.model_json_schema(),  # Schéma JSON du modèle de données
+        schema=coursDeJavascript.model_json_schema(),  # Schéma JSON du modèle de données
         extraction_type="schema",  # Type d'extraction à effectuer
         instruction=(
-            "Extrait toutes les salles de sport avec les données 'nom', 'adresse', 'description', 'note', "
-            "'lien_annonce'"
+            "Extrait tous les cours de javascript avec les données 'title', 'skills', 'description', 'reviews', 'rating'"
         ),  # Instructions pour le LLM
         input_format="markdown",  # Format du contenu d'entrée
         verbose=True,  # Active les logs détaillés
@@ -105,36 +104,36 @@ async def fetch_and_process_page(
     # Parse le contenu extrait
     donnees_extraites = json.loads(result.extracted_content)
     if not donnees_extraites:
-        print(f"Aucune salle trouvée sur la page {numero_page}.")
+        print(f"Aucun cours de javascript trouvé sur la page {numero_page}.")
         return [], False
 
     # Après l'analyse du contenu extrait
     print("Données extraites:", donnees_extraites)
 
-    # Traitement des salles
-    salles_completes = []
-    for salle in donnees_extraites:
-        # Debug: Affiche chaque salle pour comprendre sa structure
-        print("Traitement de la salle:", salle)
+    # Traitement des cours
+    cours_complets = []
+    for cours in donnees_extraites:
+        # Debug: Affiche chaque cours pour comprendre sa structure
+        print("Traitement de la cours:", cours)
 
         # Ignore la clé 'error' si elle est False
-        if salle.get("error") is False:
-            salle.pop("error", None)  # Supprime la clé 'error' si False
+        if cours.get("error") is False:
+            cours.pop("error", None)  # Supprime la clé 'error' si False
 
-        if not is_complete_salle(salle, required_keys):
-            continue  # Ignore les salles incomplètes
+        if not is_complete_cours(cours, required_keys):
+            continue  # Ignore les courss incomplètes
 
-        if is_duplicate_salle(salle["nom"], noms_vus):
-            print(f"Salle en double '{salle['nom']}' trouvée. Ignorée.")
+        if is_duplicate_cours(cours["title"], noms_vus):
+            print(f"cours en double '{cours['title']}' trouvée. Ignorée.")
             continue  # Ignore les doublons
 
-        # Ajoute la salle à la liste
-        noms_vus.add(salle["nom"])
-        salles_completes.append(salle)
+        # Ajoute la cours à la liste
+        noms_vus.add(cours["title"])
+        cours_complets.append(cours)
 
-    if not salles_completes:
-        print(f"Aucune salle complète trouvée sur la page {numero_page}.")
+    if not cours_complets:
+        print(f"Aucune cours complète trouvée sur la page {numero_page}.")
         return [], False
 
-    print(f"Extraction de {len(salles_completes)} salles de la page {numero_page}.")
-    return salles_completes, False  # Continue le crawling
+    print(f"Extraction de {len(cours_complets)} courss de la page {numero_page}.")
+    return cours_complets, False  # Continue le crawling

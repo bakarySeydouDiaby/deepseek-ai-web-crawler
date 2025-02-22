@@ -1,11 +1,10 @@
 # config.py
-
-BASE_URL = "https://www.masalledesport.com/recherche?lat=48.8575475&lng=2.3513765&city=Paris"
-CSS_SELECTOR = "[class^='border-b border-gray-300 pb-8']"
+BASE_URL = "https://www.coursera.org/search?query=react%20javascript"
+CSS_SELECTOR = "[class^='cds-9 css-0 cds-11 cds-grid-item cds-56 cds-64 cds-76 cds-90']"
 REQUIRED_KEYS = [
-    "nom",
-    "adresse",
+    "title",
+    "skills",
     "description",
-    "note",
-    "lien_annonce",
+    "reviews",
+    "rating",
 ]
