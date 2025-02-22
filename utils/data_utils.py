@@ -5,7 +5,7 @@ from models.cours_javascript import coursDeJavascript
 
 def is_duplicate_cours(nom_cours: str, noms_vus: set) -> bool:
     """
-    Vérifie si une cours de javascript est un doublon.
+    Vérifie si un cours de javascript est un doublon.
     
     Args:
         nom_cours: Nom du cours à vérifier
