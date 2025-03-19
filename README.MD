@@ -1,4 +1,4 @@
-# Crawler Deep Seek pour Salles de Sport
+# Crawler Deep Seek : generation fichier csv liste des cours javascript
 
 Ce projet est un crawler web construit avec Python qui extrait les cours de javascript sur le site coursera en utilisant la programmation asynchrone avec Crawl4AI. Il utilise une stratégie d'extraction basée sur un modèle de langage et sauvegarde les données collectées dans un fichier CSV.
 
